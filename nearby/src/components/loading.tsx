@@ -1,5 +1,6 @@
-import { colors } from "@/styles/colors";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { ActivityIndicator, StyleSheet, View } from 'react-native'
+
+import { colors } from '@/styles/colors'
 
 export function Loading() {
   return (
@@ -14,6 +15,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.gray[100]
-  }
+    backgroundColor: colors.gray[100],
+  },
 })

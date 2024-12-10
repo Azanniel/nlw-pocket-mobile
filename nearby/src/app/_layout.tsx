@@ -1,13 +1,15 @@
-import { colors } from "@/styles/colors";
-import { Stack } from "expo-router";
+/* eslint-disable camelcase */
 import {
-  useFonts,
-  Rubik_600SemiBold,
   Rubik_400Regular,
   Rubik_500Medium,
+  Rubik_600SemiBold,
   Rubik_700Bold,
+  useFonts,
 } from '@expo-google-fonts/rubik'
-import { Loading } from "@/components/loading";
+import { Stack } from 'expo-router'
+
+import { Loading } from '@/components/loading'
+import { colors } from '@/styles/colors'
 
 export default function Layout() {
   const [fontsLoaded] = useFonts({
@@ -17,7 +19,7 @@ export default function Layout() {
     Rubik_700Bold,
   })
 
-  if(!fontsLoaded) {
+  if (!fontsLoaded) {
     return <Loading />
   }
 
@@ -25,7 +27,7 @@ export default function Layout() {
     <Stack
       screenOptions={{
         headerShown: false,
-        contentStyle: { backgroundColor: colors.gray[100] }
+        contentStyle: { backgroundColor: colors.gray[100] },
       }}
     />
   )
