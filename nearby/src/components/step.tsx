@@ -1,4 +1,4 @@
-import { IconProps } from '@tabler/icons-react-native'
+import { LucideProps } from 'lucide-react-native'
 import { ComponentType } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
@@ -6,7 +6,7 @@ import { colors } from '@/styles/colors'
 import { fontFamily } from '@/styles/font-family'
 
 interface StepProps {
-  icon?: ComponentType<IconProps>
+  icon?: ComponentType<LucideProps>
   title: string
   description: string
 }

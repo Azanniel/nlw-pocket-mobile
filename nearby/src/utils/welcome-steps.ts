@@ -1,21 +1,21 @@
-import { IconMapPin, IconQrcode, IconTicket } from '@tabler/icons-react-native'
+import { MapPinIcon, QrCodeIcon, TicketIcon } from 'lucide-react-native'
 
 export const welcomeSteps = [
   {
     id: '1',
-    icon: IconMapPin,
+    icon: MapPinIcon,
     title: 'Encontre estabelecimentos',
     description: 'Veja locais perto de você que são parceiros Nearby',
   },
   {
     id: '2',
-    icon: IconQrcode,
+    icon: QrCodeIcon,
     title: 'Ative o cupom com QR Code',
     description: 'Escaneie o código no estabelecimento para usar o benefício',
   },
   {
     id: '3',
-    icon: IconTicket,
+    icon: TicketIcon,
     title: 'Garanta vantagens perto de você',
     description:
       'Ative cupons onde estiver, em diferentes tipos de estabelecimento ',
