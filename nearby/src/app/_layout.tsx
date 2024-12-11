@@ -7,6 +7,7 @@ import {
   useFonts,
 } from '@expo-google-fonts/rubik'
 import { Stack } from 'expo-router'
+import { StatusBar } from 'expo-status-bar'
 
 import { Loading } from '@/components/loading'
 import { colors } from '@/styles/colors'
@@ -24,11 +25,15 @@ export default function Layout() {
   }
 
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-        contentStyle: { backgroundColor: colors.gray[100] },
-      }}
-    />
+    <>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          contentStyle: { backgroundColor: colors.gray[100] },
+        }}
+      />
+
+      <StatusBar style="dark" />
+    </>
   )
 }
