@@ -6,11 +6,14 @@ import {
   Rubik_700Bold,
   useFonts,
 } from '@expo-google-fonts/rubik'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 
 import { Loading } from '@/components/loading'
 import { colors } from '@/styles/colors'
+
+const queryClient = new QueryClient()
 
 export default function Layout() {
   const [fontsLoaded] = useFonts({
@@ -25,7 +28,7 @@ export default function Layout() {
   }
 
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Stack
         screenOptions={{
           headerShown: false,
@@ -34,6 +37,6 @@ export default function Layout() {
       />
 
       <StatusBar style="dark" />
-    </>
+    </QueryClientProvider>
   )
 }

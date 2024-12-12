@@ -23,7 +23,8 @@
     "react",
     "jsx-a11y",
     "@typescript-eslint",
-    "simple-import-sort"
+    "simple-import-sort",
+    "@tanstack/query"
   ],
   "rules": {
     "react/self-closing-comp": "error",
@@ -51,7 +52,8 @@
     "jsx-a11y/aria-unsupported-elements": "warn",
     "jsx-a11y/role-has-required-aria-props": "warn",
     "jsx-a11y/role-supports-aria-props": "warn",
-    "react/no-unknown-property": "error"
+    "react/no-unknown-property": "error",
+    "@tanstack/query/exhaustive-deps": "error"
   },
   "ignorePatterns": [
     "node_modules",

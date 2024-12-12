@@ -1,27 +1,34 @@
-import { useEffect } from 'react'
-import { Alert, Text, View } from 'react-native'
+import { useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
+import { Alert, View } from 'react-native'
 
+import { Categories } from '@/components/categories'
 import { getCategories } from '@/http/get-categories'
 
 export default function Home() {
-  async function fetchCategories() {
-    try {
-      const categories = await getCategories()
+  const [categorySelected, setCategorySelected] = useState('')
 
-      console.log(categories)
-    } catch (error) {
-      console.error(error)
-      Alert.alert('Categorias', 'Não foi possível carregar as categorias')
-    }
-  }
+  const { data: categories } = useQuery({
+    queryKey: ['categories'],
+    queryFn: async () => {
+      try {
+        const response = await getCategories()
+        setCategorySelected(response[0].id)
 
-  useEffect(() => {
-    fetchCategories()
-  }, [])
+        return response
+      } catch {
+        Alert.alert('Categorias', 'Não foi possível carregar as categorias')
+      }
+    },
+  })
 
   return (
-    <View style={{ flex: 1, padding: 40, gap: 40 }}>
-      <Text>Home</Text>
+    <View style={{ flex: 1 }}>
+      <Categories
+        categories={categories ?? []}
+        selected={categorySelected}
+        onSelect={setCategorySelected}
+      />
     </View>
   )
 }
