@@ -9,6 +9,7 @@ import {
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 import { Loading } from '@/components/loading'
 import { colors } from '@/styles/colors'
@@ -29,12 +30,14 @@ export default function Layout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Stack
-        screenOptions={{
-          headerShown: false,
-          contentStyle: { backgroundColor: colors.gray[100] },
-        }}
-      />
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            contentStyle: { backgroundColor: colors.gray[100] },
+          }}
+        />
+      </GestureHandlerRootView>
 
       <StatusBar style="dark" />
     </QueryClientProvider>
