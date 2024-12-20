@@ -7,6 +7,8 @@ export interface Market {
   coupons: number
   cover: string
   address: string
+  latitude: number
+  longitude: number
 }
 
 export function getMarketsByCategory(categoryId: string) {

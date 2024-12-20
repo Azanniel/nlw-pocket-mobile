@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     height: 36,
     backgroundColor: colors.gray[100],
     borderWidth: 1,
-    borderColor: colors.gray[200],
+    borderColor: colors.gray[300],
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
 
   containerSelected: {
     backgroundColor: colors.green.base,
-    borderWidth: 0,
+    borderColor: colors.green.base,
   },
 
   name: {

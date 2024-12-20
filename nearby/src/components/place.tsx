@@ -23,7 +23,9 @@ export function Place({ place, ...props }: PlaceProps) {
 
       <View style={styles.content}>
         <Text style={styles.name}>{place.name}</Text>
-        <Text style={styles.description}>{place.description}</Text>
+        <Text style={styles.description} numberOfLines={2}>
+          {place.description}
+        </Text>
 
         <View style={styles.footer}>
           <TicketIcon size={16} color={colors.red.base} />

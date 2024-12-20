@@ -1,12 +1,23 @@
 import { useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
-import { Alert, View } from 'react-native'
+import * as Location from 'expo-location'
+import { StatusBar } from 'expo-status-bar'
+import { useEffect, useState } from 'react'
+import { Alert, Text, View } from 'react-native'
+import MapView, { Callout, Marker } from 'react-native-maps'
 
+import locationMark from '@/assets/location.png'
+import pinMark from '@/assets/pin.png'
 import { Categories } from '@/components/categories'
 import { Places } from '@/components/places'
 import { getCategories } from '@/http/get-categories'
 import { getMarketsByCategory } from '@/http/get-markets-by-category'
 import { colors } from '@/styles/colors'
+import { fontFamily } from '@/styles/font-family'
+
+const currentLocation = {
+  latitude: -23.561187293883442,
+  longitude: -46.656451388116494,
+}
 
 export default function Home() {
   const [categorySelected, setCategorySelected] = useState('')
@@ -40,13 +51,87 @@ export default function Home() {
     },
   })
 
+  async function getCurrentLocation() {
+    try {
+      const { granted } = await Location.requestForegroundPermissionsAsync()
+
+      if (!granted) {
+        return
+      }
+
+      const location = await Location.getCurrentPositionAsync()
+      console.log(location)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    getCurrentLocation()
+  }, [])
+
   return (
     <View style={{ flex: 1, backgroundColor: colors.gray[300] }}>
+      <StatusBar style="light" />
+
       <Categories
         categories={categories ?? []}
         selected={categorySelected}
         onSelect={setCategorySelected}
       />
+
+      <MapView
+        initialRegion={{
+          latitude: currentLocation.latitude,
+          longitude: currentLocation.longitude,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
+        }}
+        style={{ flex: 1 }}
+      >
+        <Marker
+          identifier="current"
+          coordinate={currentLocation}
+          image={locationMark}
+        />
+
+        {markets?.map((market) => {
+          return (
+            <Marker
+              key={market.id}
+              identifier={market.id}
+              image={pinMark}
+              coordinate={{
+                latitude: market.latitude,
+                longitude: market.longitude,
+              }}
+            >
+              <Callout>
+                <View>
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      color: colors.gray[600],
+                      fontFamily: fontFamily.medium,
+                    }}
+                  >
+                    {market.name}
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      color: colors.gray[600],
+                      fontFamily: fontFamily.regular,
+                    }}
+                  >
+                    {market.address}
+                  </Text>
+                </View>
+              </Callout>
+            </Marker>
+          )
+        })}
+      </MapView>
 
       <Places places={markets ?? []} />
     </View>
