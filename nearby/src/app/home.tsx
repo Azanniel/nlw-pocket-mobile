@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import * as Location from 'expo-location'
+import { router } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { useEffect, useState } from 'react'
 import { Alert, Text, View } from 'react-native'
@@ -106,7 +107,7 @@ export default function Home() {
                 longitude: market.longitude,
               }}
             >
-              <Callout>
+              <Callout onPress={() => router.navigate(`/market/${market.id}`)}>
                 <View>
                   <Text
                     style={{
