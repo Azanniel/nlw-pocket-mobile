@@ -6,6 +6,11 @@ export interface Market {
   description: string
   coupons: number
   cover: string
+  phone: string
+  rules: {
+    id: string
+    description: string
+  }[]
   address: string
   latitude: number
   longitude: number
