@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { Redirect, useLocalSearchParams } from 'expo-router'
 import { useState } from 'react'
-import { View } from 'react-native'
+import { Modal, View } from 'react-native'
 
 import { Button } from '@/components/button'
 import { Loading } from '@/components/loading'
@@ -12,12 +12,21 @@ import { getMarket } from '@/http/get-market'
 
 export default function Market() {
   const [coupon, setCoupon] = useState<string | null>(null)
+  const [isVisibleCameraModal, setIsVisibleCameraModal] = useState(false)
 
   const { id } = useLocalSearchParams<{ id: string }>()
   const { data: market, isFetching } = useQuery({
     queryKey: ['market', id],
     queryFn: () => getMarket(id),
   })
+
+  function handleOpenCamera() {
+    try {
+      setIsVisibleCameraModal(true)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   if (isFetching) {
     return <Loading />
@@ -35,10 +44,16 @@ export default function Market() {
       {coupon && <Coupon code={coupon} />}
 
       <View style={{ padding: 32 }}>
-        <Button>
+        <Button onPress={handleOpenCamera}>
           <Button.Title>Ler QR Code</Button.Title>
         </Button>
       </View>
+
+      <Modal style={{ flex: 1 }} visible={isVisibleCameraModal}>
+        <Button onPress={() => setIsVisibleCameraModal(false)}>
+          <Button.Title>Voltar</Button.Title>
+        </Button>
+      </Modal>
     </View>
   )
 }
