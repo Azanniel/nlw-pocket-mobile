@@ -1,6 +1,7 @@
 {
   "name": "nearby",
   "main": "expo-router/entry",
+  "description": "Aplicação de clube de benefícios com cupons para utilização em estabelecimentos próximos à você.",
   "version": "1.0.0",
   "private": true,
   "scripts": {
